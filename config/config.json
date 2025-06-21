@@ -1,0 +1,35 @@
+{
+    "openai": {
+      "model": "gpt-3.5-turbo",
+      "temperature": 0,
+      "max_tokens": 1000
+    },
+    "classification": {
+      "use_llm_first": true,
+      "fallback_to_rule_based": true,
+      "confidence_threshold": 0.7,
+      "embedding_model": "paraphrase-MiniLM-L6-v2",
+      "text_sample_limit": 2000,
+      "llm_weight": 0.75,
+      "embedding_weight": 0.25
+    },
+    "extraction": {
+      "use_llm_first": true,
+      "fallback_to_rule_based": true,
+      "text_sample_limit": 3000
+    },
+    "document_loading": {
+      "ocr_languages": ["en"],
+      "pdf_extract_images_if_no_text": true,
+      "supported_extensions": {
+        "document": [".pdf", ".txt", ".md", ".csv"],
+        "image": [".jpg", ".jpeg", ".png", ".tiff", ".bmp"]
+      }
+    },
+    "ui": {
+      "page_title": "Document Processor",
+      "page_icon": "📄",
+      "layout": "wide",
+      "default_llm_enabled": true
+    }
+  }

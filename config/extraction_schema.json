@@ -1,0 +1,28 @@
+{
+    "invoice": {
+      "properties": {
+        "invoice_number": {"type": "string", "description": "The unique identifier for this invoice"},
+        "date": {"type": "string", "description": "The date when the invoice was issued (format: YYYY-MM-DD)"},
+        "total_amount": {"type": "string", "description": "The total amount due on the invoice including currency symbol"},
+        "vendor_name": {"type": "string", "description": "The name of the company or vendor issuing the invoice"}
+      },
+      "required": ["invoice_number", "date", "total_amount", "vendor_name"]
+    },
+    "resume": {
+      "properties": {
+        "name": {"type": "string", "description": "Full name of the person"},
+        "email": {"type": "string", "description": "Email address for contact"},
+        "phone": {"type": "string", "description": "Phone number for contact"},
+        "education": {"type": "string", "description": "Educational background and qualifications"}
+      },
+      "required": ["name", "email"]
+    },
+    "contract": {
+      "properties": {
+        "parties": {"type": "string", "description": "The names of all parties involved in this contract"},
+        "effective_date": {"type": "string", "description": "The date when the contract becomes effective"},
+        "term_period": {"type": "string", "description": "The duration or term of the contract"}
+      },
+      "required": ["parties", "effective_date"]
+    }
+  }

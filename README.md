@@ -1,77 +1,110 @@
-# Document Classification and Data Extraction
+# Document Classification & Data Extraction
 
-## Overview
-This project implements a document classification and data extraction system with a user-friendly Streamlit interface. The system can classify uploaded documents into predefined categories and extract relevant information from them based on document type.
+A Streamlit application that classifies documents and extracts structured data using AI techniques. The application supports PDF, image, and text files.
 
 ## Features
-- Document classification using a Convolutional Neural Network (CNN)
-- Automatic data extraction from classified documents using OCR
-- User-friendly interface for document upload and result display
-- Support for multiple document types (Invoice, Resume, Receipt)
 
-## Directory Structure
+- **Document Loading**: Extract text from PDF documents and images using OCR.
+- **Ensemble Classification**: Intelligent combination of LLM (OpenAI GPT) and embedding-based similarity to classify documents into predefined categories (invoice, resume, contract) with higher accuracy.
+- **Data Extraction**: Extract structured data fields based on document type.
+- **Configurable**: Easily adjust settings through JSON configuration files.
+
+## Project Structure
+
 ```
-.
-├── README.md
-├── requirements.txt
-├── app.py                  # Main Streamlit application
-├── models/
-│   ├── classifier.py       # Document classification model
-│   └── extractor.py        # Data extraction module
-├── utils/
-│   ├── preprocess.py       # Image preprocessing utilities
-│   └── visualize.py        # Visualization utilities
-├── data/
-│   ├── train/              # Training data for classification model
-│   └── examples/           # Example documents for testing
-└── notebooks/
-    ├── train_classifier.ipynb  # Notebook for model training
-    └── test_extraction.ipynb   # Notebook for testing extraction
+document-classification/
+  ├── app.py               # Main Streamlit application
+  ├── config/              # Configuration directory
+  │   ├── categories.json  # Document categories & descriptions
+  │   ├── config.json      # Main configuration file
+  │   └── extraction_schema.json  # Data extraction schemas
+  ├── processors/          # Core processing modules
+  │   ├── data_extractor.py      # Extract structured data from documents
+  │   ├── document_classifier.py # Ensemble document classification logic
+  │   └── document_loader.py     # Load & parse different document formats
+  └── requirements.txt     # Python dependencies
 ```
 
-## Setup Instructions
+## Configuration
+
+The application uses a hierarchical configuration system with the main settings in `config/config.json`:
+
+- **OpenAI Settings**: Configure model, temperature, and token limits
+- **Classification Settings**: Ensemble weights and confidence thresholds
+- **Extraction Settings**: Data extraction options
+- **Document Loading Settings**: File format support and OCR options
+- **UI Settings**: Streamlit interface configuration
+
+## Installation
 
 ### Prerequisites
-- Python 3.8+
-- pip
+- Python 3.7+
+- Git
+- An OpenAI API key
 
-### Installation
-1. Clone the repository:
-```bash
-git clone https://github.com/yourusername/document-classification-extraction.git
-cd document-classification-extraction
-```
+### Setup Steps
 
-2. Install dependencies:
-```bash
-pip install -r requirements.txt
-```
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/Thilanka1999/document-classification.git
+   cd document-classification
+   ```
 
-### Running the Application
-1. Start the Streamlit app:
+2. **Create and activate a virtual environment:**
+
+   On Windows:
+   ```bash
+   python -m venv venv
+   .\venv\Scripts\activate
+   ```
+
+   On macOS/Linux:
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate
+   ```
+
+3. **Install dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Add your OpenAI API key** to a `.env` file:
+
+   Windows (Command Prompt):
+   ```bash
+   echo OPENAI_API_KEY=your_api_key_here > .env
+   ```
+
+   Windows (PowerShell):
+   ```powershell
+   "OPENAI_API_KEY=your_api_key_here" | Out-File -Encoding utf8 .env
+   ```
+
+   macOS/Linux:
+   ```bash
+   echo "OPENAI_API_KEY=your_api_key_here" > .env
+   ```
+
+## Usage
+
+Run the Streamlit app:
+
 ```bash
 streamlit run app.py
 ```
-2. Open your browser and go to `http://localhost:8501`
 
-## Usage
-1. Upload a document (PDF or image) using the file uploader
-2. The system will classify the document type
-3. Based on the classification, relevant information will be extracted
-4. The extracted information will be displayed on the interface
+Then upload a document through the web interface. The system will:
+1. Load and parse the document
+2. Classify the document type using the ensemble method
+3. Extract relevant structured data based on the detected type
+4. Display results including confidence scores, reasoning, and extracted fields
 
-## Model Training
-To train the classification model on your own data:
-1. Add your training data to the `data/train/` directory
-2. Run the training notebook:
-```bash
-jupyter notebook notebooks/train_classifier.ipynb
-```
+## Extending the System
 
-## Technical Details
-- Document classification: CNN-based model trained on document images
-- Data extraction: Combination of OCR (Optical Character Recognition) and rule-based information extraction
-- UI: Streamlit framework
+### Adding New Document Categories
+1. Add new categories to `config/categories.json` with name and description.
+2. Add corresponding extraction schemas to `config/extraction_schema.json`.
 
-## License
-This project is licensed under the MIT License - see the LICENSE file for details. 
+### Customizing Configuration
+Edit `config/config.json` to adjust model parameters, ensemble weights, confidence thresholds, and other settings. 
