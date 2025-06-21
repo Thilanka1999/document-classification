@@ -1,0 +1,16 @@
+{
+  "categories": [
+    {
+      "name": "invoice",
+      "description": "A document requesting payment for goods or services. Contains details like invoice number, date, amounts, and vendor information."
+    },
+    {
+      "name": "resume",
+      "description": "A document outlining a person's qualifications, work experience, education, and skills for employment purposes."
+    },
+    {
+      "name": "contract",
+      "description": "A legal agreement between parties that outlines terms, conditions, responsibilities, and other contractual details."
+    }
+  ]
+}
