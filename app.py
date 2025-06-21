@@ -194,7 +194,14 @@ if uploaded_file is not None:
                 # Convert to DataFrame for display
                 extracted_items = []
                 for k, v in result["extracted_data"].items():
-                    extracted_items.append({"Field": k, "Value": v})
+                    # Ensure homogeneous (string) type for Arrow compatibility
+                    if isinstance(v, (dict, list)):
+                        safe_val = json.dumps(v, ensure_ascii=False)
+                    elif v is None:
+                        safe_val = ""
+                    else:
+                        safe_val = str(v)
+                    extracted_items.append({"Field": k, "Value": safe_val})
                 
                 df = pd.DataFrame(extracted_items)
                 st.table(df)
